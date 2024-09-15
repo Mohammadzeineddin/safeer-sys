@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرن السفير</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+    .container {
+      max-width: 100%;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 1.5em;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .product {
+      flex: 1 1 calc(33.333% - 20px);
+      background-color: #ffe6cc;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s;
+      margin-bottom: 20px;
+    }
+    .product:hover {
+      background-color: #ffcc99;
+    }
+    .product button {
+      background-color: #ff704d;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .product button:focus {
+      outline: none;
+    }
+    .quantity {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    #total {
+      text-align: center;
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #333;
+    }
+    .reset-btn {
+      background-color: #cc0000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .product {
+        flex: 1 1 calc(50% - 20px);
+      }
+      h1 {
+        font-size: 1.2em;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .product {
+        flex: 1 1 100%;
+      }
+      h1 {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>فرن السفير</h1>
+    <div class="product-list">
+      <div class="product" data-price="45000">
+        <h3>زعتر</h3>
+        <p>السعر:45.000 (عادي), 50.000 (مشروح)</p>
+        <button onclick="addToOrder(45000, 'chocolateCake', 'regular')">عادي</button>
+        <button onclick="addToOrder(50000, 'chocolateCake', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="chocolateCakeRegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="chocolateCakePremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="100000">
+        <h3>جبنة</h3>
+        <p>السعر:100.000 (عادي), 130.000 (مشروح)</p>
+        <button onclick="addToOrder(100000, 'blueberryMuffin', 'regular')">عادي</button>
+        <button onclick="addToOrder(130000, 'blueberryMuffin', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="blueberryMuffinRegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="blueberryMuffinPremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="80000">
+        <h3>كوكتيل</h3>
+        <p>السعر:80.000 (عادي), 110.000 (مشروح)</p>
+        <button onclick="addToOrder(80000, 'croissant', 'regular')">عادي</button>
+        <button onclick="addToOrder(110000, 'croissant', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="croissantRegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="croissantPremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="70000">
+        <h3>بندورة </h3>
+        <p>السعر:70.000 (عادي), 90.000 (مشروح)</p>
+        <button onclick="addToOrder(70000, 'strawberryTart', 'regular')">عادي</button>
+        <button onclick="addToOrder(90000, 'strawberryTart', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="strawberryTartRegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="strawberryTartPremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="90000">
+        <h3>كشك</h3>
+        <p>السعر:90.000 (عادي), 110.000 (مشروح)</p>
+        <button onclick="addToOrder(90000, 'donut', 'regular')">عادي</button>
+        <button onclick="addToOrder(110000, 'donut', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="donutRegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="donutPremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>لحمة</h3>
+        <p>السعر:110.000 (عادي), 140.000 (مشروح)</p>
+        <button onclick="addToOrder(110000, 'applePie', 'regular')">عادي</button>
+        <button onclick="addToOrder(140000, 'applePie', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePieRegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePiePremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>مرتديلا</h3>
+        <p>السعر:130.000 (عادي), 170.000 (مشروح)</p>
+        <button onclick="addToOrder(130000, 'applePie2', 'regular')">عادي</button>
+        <button onclick="addToOrder(170000, 'applePie2', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePie2RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePie2PremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>حبش+جبنة</h3>
+        <p>السعر:130.000 (عادي), 170.000 (مشروح)</p>
+        <button onclick="addToOrder(130000, 'applePie3', 'regular')">عادي</button>
+        <button onclick="addToOrder(170000, 'applePie3', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePie3RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePie3PremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>سجق+جبنة</h3>
+        <p>السعر:130.000 (عادي), 170.000 (مشروح)</p>
+        <button onclick="addToOrder(130000, 'applePie4', 'regular')">عادي</button>
+        <button onclick="addToOrder(170000, 'applePie4', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePie4RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePie4PremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>بندورة+جبنة</h3>
+        <p>السعر:130.000 (عادي), 160.000 (مشروح)</p>
+        <button onclick="addToOrder(130000, 'applePie5', 'regular')">عادي</button>
+        <button onclick="addToOrder(160000, 'applePie5', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePie5RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePie5PremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>سبانغ</h3>
+        <p>السعر:50.000 (عادي), 90.000 (مشروح)</p>
+        <button onclick="addToOrder(50000, 'applePie6', 'regular')">عادي</button>
+        <button onclick="addToOrder(90000, 'applePie6', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePie6RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePie6PremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>بقلة</h3>
+        <p>السعر:50.000 (عادي), 90.000 (مشروح)</p>
+        <button onclick="addToOrder(50000, 'applePie7', 'regular')">عادي</button>
+        <button onclick="addToOrder(90000, 'applePie7', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="applePie7RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="applePie7PremiumQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>كعكة</h3>
+        <p>السعر:250.000</p>
+        <button onclick="addToOrder(250000, 'applePie8', 'regular')">عادي</button>
+        <p class="quantity"> عادي: <span id="applePie8RegularQty">0</span></p>
+      </div>
+      <div class="product" data-price="110000">
+        <h3>بيتزا خضرا</h3>
+        <p>السعر:250.000 (وسط), 350.000 (كبير)</p>
+        <button onclick="addToOrder(250000, 'apple', 'regular')">وسط</button>
+        <button onclick="addToOrder(350000, 'apple', 'premium')">كبير</button>
+        <p class="quantity"> وسط: <span id="appleRegularQty">0</span></p>
+        <p class="quantity"> كبير:<span id="applePremiumQty">0</span></p> <!-- Fix the ID here -->
+        
+      </div>
+      <div class="product" data-price="110000">
+        <h3>بيتزا مرتديلا</h3>
+        <p>السعر:250.000 (وسط), 450.000 (كبير)</p>
+        <button onclick="addToOrder(250000, 'apple2', 'regular')">وسط</button>
+        <button onclick="addToOrder(450000, 'apple2', 'premium')">كبير</button>
+        <p class="quantity"> وسط: <span id="apple2RegularQty">0</span></p>
+        <p class="quantity"> كبير:<span id="apple2PremiumQty">0</span></p> <!-- Fix the ID here -->
+      </div>
+      <div class="product" data-price="110000">
+        <h3>بيتزا حبش</h3>
+        <p>السعر:350.000 (وسط), 450.000 (كبير)</p>
+        <button onclick="addToOrder(350000, 'apple3', 'regular')">وسط</button>
+        <button onclick="addToOrder(450000, 'apple3', 'premium')">كبير</button>
+        <p class="quantity"> وسط: <span id="apple3RegularQty">0</span></p>
+        <p class="quantity"> كبير:<span id="apple3PremiumQty">0</span></p> <!-- Fix the ID here -->
+        
+      </div>
+    </div>
+    <div id="total">الاجمالي: ل.ل 0</div>
+    <button class="reset-btn" onclick="resetOrder()">إعادة تعيين</button>
+  </div>
+
+  <script>
+    let totalPrice = 0;
+
+    // Track separate quantities for regular and premium versions
+    const quantities = {
+      chocolateCake: { regular: 0, premium: 0 },
+      blueberryMuffin: { regular: 0, premium: 0 },
+      croissant: { regular: 0, premium: 0 },
+      strawberryTart: { regular: 0, premium: 0 },
+      donut: { regular: 0, premium: 0 },
+      applePie: { regular: 0, premium: 0 },
+      applePie2: { regular: 0, premium: 0 },
+      applePie3: { regular: 0, premium: 0 },
+      applePie4: { regular: 0, premium: 0 },
+      applePie5: { regular: 0, premium: 0 },
+      applePie6: { regular: 0, premium: 0 },
+      applePie7: { regular: 0, premium: 0 },
+      applePie8: { regular: 0, premium: 0 },
+      apple: { regular: 0, premium: 0 },
+      apple2: { regular: 0, premium: 0 },
+      apple3: { regular: 0, premium: 0 },
+    };
+
+    function addToOrder(price, product, type) {
+      totalPrice += price;
+      quantities[product][type] += 1;
+
+      // Update the total price display
+      document.getElementById('total').innerText = 'الاجمالي: ل.ل ' + totalPrice.toFixed(0);
+
+      // Update the quantities display for both regular and premium
+      document.getElementById(product + 'RegularQty').innerText = quantities[product].regular;
+      document.getElementById(product + 'PremiumQty').innerText = quantities[product].premium;
+    }
+
+    // Reset function
+    // Reset function
+    function resetOrder() {
+      // Reset the total price to 0
+      totalPrice = 0;
+      
+      console.log("Resetting order...");
+    
+      // Reset the quantity for all products
+      for (let product in quantities) {
+        console.log(`Resetting ${product}...`);
+        quantities[product].regular = 0;
+        quantities[product].premium = 0;
+    
+        // Update the HTML elements
+        const regularQtyElement = document.getElementById(product + 'RegularQty');
+        const premiumQtyElement = document.getElementById(product + 'PremiumQty');
+        document.getElementById('total').innerText='0 الاجمالي:ل.ل';
+        
+        if (regularQtyElement) {
+          regularQtyElement.innerText = '0';
+        } else {
+          console.warn(`Element with ID ${product + 'RegularQty'} not found.`);
+        }
+        
+        if (premiumQtyElement) {
+          premiumQtyElement.innerText = '0';
+        } else {
+          console.warn(`Element with ID ${product + 'PremiumQty'} not found.`);
+        }
+      }
+    
+      // Reset the total price display
+      document.getElementById('total').innerText = 'الاجمالي: ل.ل 0';
+    
+      console.log("Order has been reset.");
+    }
+  </script>
+</body>
+</html>
