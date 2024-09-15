@@ -227,7 +227,14 @@
         <button onclick="addToOrder(450000, 'apple3', 'premium')">كبير</button>
         <p class="quantity"> وسط: <span id="apple3RegularQty">0</span></p>
         <p class="quantity"> كبير:<span id="apple3PremiumQty">0</span></p> <!-- Fix the ID here -->
-        
+        <div class="product" data-price="45000">
+        <h3>خضرا</h3>
+        <p>5.000 (عادي), 10.000 (مشروح)</p>
+        <button onclick="addToOrder(5000, 'apple4', 'regular')">عادي</button>
+        <button onclick="addToOrder(10000, 'apple4', 'premium')">مشروح</button>
+        <p class="quantity"> عادي: <span id="apple4RegularQty">0</span></p>
+        <p class="quantity"> مشروح: <span id="apple4PremiumQty">0</span></p>
+      </div>
       </div>
     </div>
     <div id="total">الاجمالي: ل.ل 0</div>
@@ -255,6 +262,7 @@
       apple: { regular: 0, premium: 0 },
       apple2: { regular: 0, premium: 0 },
       apple3: { regular: 0, premium: 0 },
+      apple4: { regular: 0, premium: 0 },
     };
 
     function addToOrder(price, product, type) {
